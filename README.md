@@ -1,2 +1,2 @@
-# Deep-Reinforcement-Q-learning-
+# Deep-Reinforcement-Q-learning
 Navigaiton Project: Unity Environment  banana picking 
