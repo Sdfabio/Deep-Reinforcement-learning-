@@ -84,6 +84,8 @@ class Agent():
             gamma (float): discount factor
         """
         states, actions, rewards, next_states, dones = experiences
+        
+        #Without Double DQN , uncomment the next 2 lines
         # Get max predicted Q values (for next states) from target model
         # Q_targets_next = self.qnetwork_target(next_states).detach().max(1).unsqueeze(1) # without double DQN
         
@@ -117,6 +119,8 @@ class Agent():
             tau (float): interpolation parameter 
         """
         #We choose which update we will do by specifying TAU = 0 or > 0
+        # TAU == 0 for fixed Q target with episodes (My experiment)
+        # TAU > 0 for soft Update
         if tau>0:
             for target_param, local_param in zip(target_model.parameters(), local_model.parameters()):
                 target_param.data.copy_(tau*local_param.data + (1.0-tau)*target_param.data)
