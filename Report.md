@@ -1,7 +1,7 @@
 [//]: # (Image References)
 
 [image1]: https://user-images.githubusercontent.com/10624937/42135619-d90f2f28-7d12-11e8-8823-82b970a54d7e.gif "Trained Agent"
-[image1]: DeepRL.PNG "DeepRL"
+[image2]: DeepRL.PNG "DeepRL"
 
 
 # Deep reinforcement Nanodegree
@@ -24,11 +24,11 @@ The state space has 37 dimensions and contains the agent's velocity, along with 
 To make the agent learn, I will use a technique un Deep Reinceforcement Learning called Deep Q-Networks with some tweaks. 
 
 First of all, deep reinforcement is a field of AI in which we use the environement and is feedback to the agent to guie the agent how to learn form it.![DeepRL][image2]
-The procedure is simple. In our case, the agent move in the squareWorld and is in some state H (example: State H velocity 3 mph , ray vision at angle 30 degres from the west wall,...) and if he collects a banana, he receives a reward of +1. When that happens, we will change the way the agent act to emphasize more the action the agent took when he was in state H. 
+The procedure is simple. In our case, the agent move in the squareWorld and is in some state H (example: State H velocity 3 mph , ray vision at angle 30 degres from the west wall,...) and if he collects a banana, he receives a reward of +1. When that happens, we will change the way the agent act to emphasize more the action the agent took when he was in state H.  ![image2](DeepRL.PNG)
 
 In fact, when we are talking about action of an agent, the way we design it is by doing a mapping between a state A the agent might be in (Example State A velocity 2 mph , ray vision at angle 30 degres from the east wall,... ) and the action the agent SHOULD take to maximize the total reward (to collect many yellow bananas avoiding blue ones). This mappig here is called the policy \pi (\pi(state=s) = action a ). Now to approach the best policy, we use an inermediary fucntion , Q function or action state value function. And it is given by the 2nd Bellman Equation: 
 
-$$q_{\pi}(s, a)=\mathbb{E}_{\pi}\left[R_{t+1}+\gamma q_{\pi}\left(S_{t+1}, A_{t+1}\right) \mid S_{t}=s, A_{t}=a\right]$$ [Richard S. Sutton and Andrew G. Barto (p.64)](http://incompleteideas.net/book/RLbook2020.pdf)
+$$q_{\pi}(s, a)=\mathbb{E}_{\pi}\left[R_{t+1}+\gamma q_{\pi}\left(S_{t+1}, A_{t+1}\right) \mid S_{t}=s, A_{t}=a\right]$$ [Richard S. Sutton and Andrew G. Barto (p.64)](http://incompleteideas.net/book/RLbook2020.pdf) 
 
 This equation calculates the *EXPECTED* (we are in a stochastic environment) reward we will have when we are in state S and have taken action a all of that following the policy \pi (rules for action given the state of the agent when he is moving in the world). So if we can maximize this function , we will just have to take at each state s , the action a that maximizes the q-function. And this processus will be our way to approach the optimal policy \pi*.
 
