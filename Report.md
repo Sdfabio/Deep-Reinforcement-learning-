@@ -1,6 +1,6 @@
 [//]: # (Image References)
 
-[image1]: https://user-images.githubusercontent.com/10624937/42135619-d90f2f28-7d12-11e8-8823-82b970a54d7e.gif "Trained Agent"
+[image1]: soft update + fixed Q targets + Experience replay + double DQN + Dueling DQN avg 17.PNG "Trained Agent"
 [image2]: DeepRL.PNG "DeepRL"
 
 
@@ -23,8 +23,8 @@ The state space has 37 dimensions and contains the agent's velocity, along with 
 
 To make the agent learn, I will use a technique un Deep Reinceforcement Learning called Deep Q-Networks with some tweaks. 
 
-First of all, deep reinforcement is a field of AI in which we use the environement and is feedback to the agent to guie the agent how to learn form it.![DeepRL][image2]
-The procedure is simple. In our case, the agent move in the squareWorld and is in some state H (example: State H velocity 3 mph , ray vision at angle 30 degres from the west wall,...) and if he collects a banana, he receives a reward of +1. When that happens, we will change the way the agent act to emphasize more the action the agent took when he was in state H.  ![image2](DeepRL.PNG)
+First of all, deep reinforcement is a field of AI in which we use the environement and is feedback to the agent to guie the agent how to learn form it. ![Deep RL](DeepRL.PNG)
+The procedure is simple. In our case, the agent move in the squareWorld and is in some state H (example: State H velocity 3 mph , ray vision at angle 30 degres from the west wall,...) and if he collects a banana, he receives a reward of +1. When that happens, we will change the way the agent act to emphasize more the action the agent took when he was in state H.  
 
 In fact, when we are talking about action of an agent, the way we design it is by doing a mapping between a state A the agent might be in (Example State A velocity 2 mph , ray vision at angle 30 degres from the east wall,... ) and the action the agent SHOULD take to maximize the total reward (to collect many yellow bananas avoiding blue ones). This mappig here is called the policy \pi (\pi(state=s) = action a ). Now to approach the best policy, we use an inermediary fucntion , Q function or action state value function. And it is given by the 2nd Bellman Equation: 
 
@@ -94,6 +94,7 @@ In this section, the final model and any supporting qualities should be evaluate
 - _Has the final model been tested with various inputs to evaluate whether the model generalizes well to unseen data?_
 - _Is the model robust enough for the problem? Do small perturbations (changes) in training data or the input space greatly affect the results?_
 - _Can results found from the model be trusted?_
+![Trained Agent](soft update + fixed Q targets + Experience replay + double DQN + Dueling DQN avg 17.PNG)
 
 ### Justification
 In this section, your model’s final solution and its results should be compared to the benchmark you established earlier in the project using some type of statistical analysis. You should also justify whether these results and the solution are significant enough to have solved the problem posed in the project. Questions to ask yourself when writing this section:
