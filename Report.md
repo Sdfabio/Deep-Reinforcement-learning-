@@ -84,8 +84,9 @@ where alpha and beta are the respective parameters for fc4_advantage which calcu
 
 
 ### Model Evaluation and Validation
-By adding each techniques one at a time and training the agent, we were able to obtain an average score of 16-17 around 1500 episiodes. This clearly surpass the benchmark !
+By adding each techniques one at a time and training the agent, we were able to obtain an average score of 16 around 1100 episiodes. This clearly surpass the benchmark !
 ![Trained Agent](results.PNG)
+![resulting](code.PNG)
 
 
 ## V. Conclusion
