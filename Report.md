@@ -91,7 +91,9 @@ By adding each techniques one at a time and training the agent, we were able to 
 ## V. Conclusion
 
 ### Reflection and imrpovements
-This project was really intersting in terms of applying recent techniques in reinforcement techniques, ans in terms of reading papers to understand the justification of these techniques. I am always interested in the mathematical aspect to understand better. Of course when my agent was able to perform such a good score i was really happy ! Just look at this smart agent dodging blue bananas while collecting yellow ones. ![trainedplayer](agent.gif)
+This project was really intersting in terms of applying recent techniques in reinforcement techniques, ans in terms of reading papers to understand the justification of these techniques. I am always interested in the mathematical aspect to understand better. Of course when my agent was able to perform such a good score i was really happy ! Just look at this smart agent dodging blue bananas while collecting yellow ones ! 
+
+![trainedplayer](trained.gif)
 
 
 
