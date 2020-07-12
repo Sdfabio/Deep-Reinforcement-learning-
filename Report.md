@@ -84,14 +84,18 @@ where alpha and beta are the respective parameters for fc4_advantage which calcu
 
 
 ### Model Evaluation and Validation
-By adding each techniques one at a time and training the agent, we wre able to obtain an average score of 16-17 around 1500 episiodes. This clearly surpass the benchmark !
+By adding each techniques one at a time and training the agent, we were able to obtain an average score of 16-17 around 1500 episiodes. This clearly surpass the benchmark !
 ![Trained Agent](results.PNG)
 
 
 ## V. Conclusion
 
 ### Reflection and imrpovements
-This project was really intersting in terms of applying recent techniques in reinforcement techniques, ans in terms of reading papers to understand the justification of these techniques. I am always interested in the mathematical aspect to understand better. Of course when my agent was able to perform such a good score i was really happy ! This is just the beginning of many experiences and my adventure in the reinforcement Learning field. 
+This project was really intersting in terms of applying recent techniques in reinforcement techniques, ans in terms of reading papers to understand the justification of these techniques. I am always interested in the mathematical aspect to understand better. Of course when my agent was able to perform such a good score i was really happy ! Just look at this smart agent dodging blue bananas while collecting yellow ones. ![trainedplayer](agent.gif)
+
+
+
+This is just the beginning of many experiences and my adventure in the reinforcement Learning field. 
 
 Possible improvements can be: 
 
