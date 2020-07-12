@@ -20,7 +20,7 @@ The state space has 37 dimensions and contains the agent's velocity, along with 
 
 To make the agent learn, I will use a technique un Deep Reinceforcement Learning called Deep Q-Networks with some tweaks. 
 
-First of all, deep reinforcement is a field of AI in which we use the environement and is feedback to the agent to guie the agent how to learn form it. ![Deep RL](DeepRL.PNG)
+First of all, deep reinforcement is a field of AI in which we use the environement and is feedback to the agent to guie the agent how to learn form it. ![Deep RL](DeepRL.PNG) [image source](https://missinglink.ai/guides/neural-network-concepts/complete-guide-deep-reinforcement-learning-concepts-process-real-world-applications/)
 The procedure is simple. In our case, the agent move in the squareWorld and is in some state H (example: State H velocity 3 mph , ray vision at angle 30 degres from the west wall,...) and if he collects a banana, he receives a reward of +1. When that happens, we will change the way the agent act to emphasize more the action the agent took when he was in state H.  
 
 In fact, when we are talking about action of an agent, the way we design it is by doing a mapping between a state A the agent might be in (Example State A velocity 2 mph , ray vision at angle 30 degres from the east wall,... ) and the action the agent SHOULD take to maximize the total reward (to collect many yellow bananas avoiding blue ones). This mappig here is called the policy \pi (\pi(state=s) = action a ). Now to approach the best policy, we use an inermediary fucntion , Q function or action state value function. And it is given by the 2nd Bellman Equation: 
