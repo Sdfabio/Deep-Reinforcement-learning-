@@ -1,7 +1,4 @@
-[//]: # (Image References)
 
-[image1]: soft update + fixed Q targets + Experience replay + double DQN + Dueling DQN avg 17.PNG "Trained Agent"
-[image2]: DeepRL.PNG "DeepRL"
 
 
 # Deep reinforcement Nanodegree
@@ -94,7 +91,7 @@ In this section, the final model and any supporting qualities should be evaluate
 - _Has the final model been tested with various inputs to evaluate whether the model generalizes well to unseen data?_
 - _Is the model robust enough for the problem? Do small perturbations (changes) in training data or the input space greatly affect the results?_
 - _Can results found from the model be trusted?_
-![Trained Agent](soft update + fixed Q targets + Experience replay + double DQN + Dueling DQN avg 17.PNG)
+![Trained Agent]results.PNG)
 
 ### Justification
 In this section, your model’s final solution and its results should be compared to the benchmark you established earlier in the project using some type of statistical analysis. You should also justify whether these results and the solution are significant enough to have solved the problem posed in the project. Questions to ask yourself when writing this section:
@@ -104,35 +101,18 @@ In this section, your model’s final solution and its results should be compare
 
 
 ## V. Conclusion
-_(approx. 1-2 pages)_
 
-### Free-Form Visualization
-In this section, you will need to provide some form of visualization that emphasizes an important quality about the project. It is much more free-form, but should reasonably support a significant result or characteristic about the problem that you want to discuss. Questions to ask yourself when writing this section:
-- _Have you visualized a relevant or important quality about the problem, dataset, input data, or results?_
-- _Is the visualization thoroughly analyzed and discussed?_
-- _If a plot is provided, are the axes, title, and datum clearly defined?_
+### Reflection and imrpovements
+This project was really intersting in terms of applying recent techniques in reinforcement techniques, ans in terms of reading papers to understand the justification of these techniques. I am always interested in the mathematical aspect to understand better. Of course when my agent was able to perform such a good score i was really happy ! This is just the beginning of many experiences and my adventure in the reinforcement Learning field. 
 
-### Reflection
-In this section, you will summarize the entire end-to-end problem solution and discuss one or two particular aspects of the project you found interesting or difficult. You are expected to reflect on the project as a whole to show that you have a firm understanding of the entire process employed in your work. Questions to ask yourself when writing this section:
-- _Have you thoroughly summarized the entire process you used for this project?_
-- _Were there any interesting aspects of the project?_
-- _Were there any difficult aspects of the project?_
-- _Does the final model and solution fit your expectations for the problem, and should it be used in a general setting to solve these types of problems?_
+Possible improvements can be: 
 
-### Improvement
-In this section, you will need to provide discussion as to how one aspect of the implementation you designed could be improved. As an example, consider ways your implementation can be made more general, and what would need to be modified. You do not need to make this improvement, but the potential solutions resulting from these changes are considered and compared/contrasted to your current solution. Questions to ask yourself when writing this section:
-- _Are there further improvements that could be made on the algorithms or techniques you used in this project?_
-- _Were there algorithms or techniques you researched that you did not know how to implement, but would consider using if you knew how?_
-- _If you used your final solution as the new benchmark, do you think an even better solution exists?_
+-[Prioritized experience replay](https://arxiv.org/abs/1511.05952) or [Double Prioritized State Recycled Experience Replay (DPSR) (July 2020)](https://arxiv.org/abs/2007.03961): These permit to select experriences from which the agent will learn the most by attributing a biggrer sample probability of experiences wha have big error (big error will cause big gradient, so big steps in learning). And the recent paper, shows us it is possible to constitute the memory of experience more precisely. Normally, we replace the experiences from new one in the memory when the agent is acting in the environement. Now the replacement can be smarter, we can discard the experiences with the lowest potential of learning , and not just the earliest because this one can have great potential of lerning (high delta error). This is prioritized replacing. Now only this can incur bias , because we will only learn from the same experiences of great delta. So to remove this bias, we do state recycling to diversify the experiences (s,a,r,s') but not by experience replacing but by state recycling with the intuition that the same state will have a good delta even with another action. This also help to explore more different next state from the original replay buffer (memory of experiences). 
 
------------
+-[RAINBOW](https://arxiv.org/abs/1710.02298) Whixh apply all these techniques in one except the DPSR
 
-**Before submitting, ask yourself. . .**
+-Change the network to use CNN instead of fully connected. This will help understand the impact of the dueling DQN by analizing when we are considering advantage or not by looking inside CNN on which state the agent care about the choice of his action. (A state for example where he has to dodge blue bananas), we should be able to see a bigger illumination on the blue banana.
 
-- Does the project report you’ve written follow a well-organized structure similar to that of the project template?
-- Is each section (particularly **Analysis** and **Methodology**) written in a clear, concise and specific fashion? Are there any ambiguous terms or phrases that need clarification?
-- Would the intended audience of your project be able to understand your analysis, methods, and results?
-- Have you properly proof-read your project report to assure there are minimal grammatical and spelling mistakes?
-- Are all the resources used for this project correctly cited and referenced?
-- Is the code that implements your solution easily readable and properly commented?
-- Does the code execute without error and produce results similar to those reported?
+- Use the direct approximation of the policy instead of passing by the Q value to find the policy ([Policy based mathods](https://papers.nips.cc/paper/1713-policy-gradient-methods-for-reinforcement-learning-with-function-approximation.pdf))
+
+
