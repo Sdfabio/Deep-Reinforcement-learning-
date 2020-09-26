@@ -35,8 +35,8 @@ Now with all that in mind, we have to consider a serious fact. Our state are con
 
 ![error](error.PNG)
  
- As you can see, there are 2 Neural networks one local and one target (different parameters θ_local and θ_target ). We use a way to optimize them while stabilizing the learning with some techniques. And one more important problem is that, the way we are doing the learning is biased but has low variance. Why ? Because the learning is based on estimation made on experiences gain from episodes. So If we begin with some bias and the exploration part of the policy is not well enough, then we will finish with biased policy. The variance is low because we make estimation on many episodes. A way to convert this is to use an actor who will play the role of our policy here and a critic who will help judge the performance of the actor. We do this to reduce the bias increasing a little nit the variance of our estimations. 
-
+ As you can see, there are 2 Neural networks one local and one target (different parameters θ_local and θ_target ). We use a way to optimize them while stabilizing the learning with some techniques. And one more important problem is that we update the policy parameter through Monte Carlo updates (i.e. taking random samples). This introduces in inherent high variability in log probabilities (log of the policy distribution) and cumulative reward values, because each trajectories during training can deviate from each other at great degrees. Consequently, the high variability in log probabilities and cumulative reward values will make noisy gradients, and cause unstable learning and/or the policy distribution skewing to a non-optimal direction. Besides high variance of gradients, another problem with policy gradients occurs trajectories have a cumulative reward of 0. The essence of policy gradient is increasing the probabilities for “good” actions and decreasing those of “bad” actions in the policy distribution; both “goods” and “bad” actions with will not be learned if the cumulative reward is 0. One way to reduce variance and increase stability is subtracting the cumulative reward by a baseline
+ 
 The details will be explained in the 'Analysis' part
 
 ### Metrics and benchmark
@@ -52,7 +52,14 @@ We directly and only use the states given by the environment to make the agent l
 
 ### Algorithms and Techniques
 
-To make the agent learn I used DDPG technique. The process in the in the [DDPG_Project.py](DDPG_Project.py) code is the following:
+One way to reduce variance and increase stability is subtracting the cumulative reward by a baseline:
+![baseline](baseline.PNG)
+
+Intuitively, making the cumulative reward smaller by subtracting it with a baseline will make smaller gradients, and thus smaller and more stable updates.
+The baseline can take various values. The set of equations below illustrates the classic variants of actor critic methods (with respect to REINFORCE)
+![baselines](baselines.PNG)
+
+To make the agent learn I used DDPG technique using Q Actor Critic baseline. The process in the in the [DDPG_Project.py](DDPG_Project.py) code is the following:
 Learning of continuous actions requires an actor (`Actor` class) and a critic (`Critic` class) model.
 The actor model learns to predict an action vector while the critic model learns Q values for state-action pairs.
 DDPG uses experience replay (`Replay` class) to sample batches of uncorrelated experiences to train on. 
