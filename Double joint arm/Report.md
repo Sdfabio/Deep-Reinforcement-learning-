@@ -161,6 +161,6 @@ Possible improvements can be:
 -[RAINBOW](https://arxiv.org/abs/1710.02298) Which apply all these techniques in one except the DPSR
 
 - A more systematic way of searching of optimal values for hyperparameters, e.g. grid search, random search, bayesian optimization or genetic algorithm
-- Perhaps use Parallel training of other agents to gather multiple experiences while learning. (Possible in version 2 of the reacher environment). This is called ![A3C](https://arxiv.org/pdf/1602.01783.pdf)
-- Use ![PPO](https://spinningup.openai.com/en/latest/algorithms/ppo.html) or even better ![D4PG](https://arxiv.org/pdf/1804.08617.pdf) 
+- Perhaps use Parallel training of other agents to gather multiple experiences while learning. (Possible in version 2 of the reacher environment). This is called [A3C](https://arxiv.org/pdf/1602.01783.pdf)
+- Use [PPO](https://spinningup.openai.com/en/latest/algorithms/ppo.html) or even better [D4PG](https://arxiv.org/pdf/1804.08617.pdf) 
 
