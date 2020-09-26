@@ -59,7 +59,7 @@ First you should know that the baseline b(s) has the proprietary of being a cons
 The baseline can take various values. The set of equations below illustrates the classic variants of actor critic methods (with respect to REINFORCE)
 ![baselines](baselines.PNG)
 
-To make the agent learn I used DDPG technique using Q Actor Critic baseline. The process in the in the [DDPG_Project.py](DDPG_Project.py) code is the following:
+To make the agent learn I used DDPG technique using Q Actor Critic baseline. The process in the in the [DDPG_project(1).py](DDPG_project(1).py) code is the following:
 Learning of continuous actions requires an actor (`Actor` class) and a critic (`Critic` class) model.
 The actor model learns to predict an action vector while the critic model learns Q values for state-action pairs.
 DDPG uses experience replay (`Replay` class) to sample batches of uncorrelated experiences to train on. 
@@ -158,7 +158,7 @@ Plot of the score:
 
 This project was really intersting in terms of applying recent techniques in reinforcement techniques, and in terms of reading papers to understand the justification of these techniques. I am always interested in the mathematical aspect to understand better. Of course when my agent was able to perform such a good score I was really happy ! Just look at this smart arm reaching the target !
 
-![trainedplayer](trained.gif)
+![trainedplayer](arm.gif)
 
 This is just the beginning of many experiences and my adventure in the reinforcement Learning field. 
 Possible improvements can be: 
