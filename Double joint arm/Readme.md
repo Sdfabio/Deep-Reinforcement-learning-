@@ -2,7 +2,7 @@
 
 ## Project description
 
-[![Solution demo](http://img.youtube.com/vi/cl5YeaxYm6c/0.jpg)](https://www.youtube.com/watch?v=cl5YeaxYm6c)
+![Solution demo](arm.gif)
 
 In this project, an agent learns to control a double-jointed arm to follow the target locations (Reacher environment).
 A reward of +0.1 is provided for each step that the agent's hand is in the target location. 
