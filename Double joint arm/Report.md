@@ -1,7 +1,7 @@
 
 
 
-# Deep reinforcement Nanodegree
+# Deep reinforcement learning Nanodegree(Udacity)
 ## Continuous Control Project
 Fabrice Simo Defo  
 Septempber 26th, 2020
@@ -55,7 +55,7 @@ We directly and only use the states given by the environment to make the agent l
 One way to reduce variance and increase stability is subtracting the cumulative reward by a baseline:
 ![baseline](baseline_formula.PNG)
 
-Intuitively, making the cumulative reward smaller by subtracting it with a baseline will make smaller gradients, and thus smaller and more stable updates.
+First you should know that the baseline b(s) has the proprietary of being a constant by doing the gradient by the paramters theta. Meaning that in the gradient formula, we can add or substract a term aslong as it is not dependent on the parameters theta. Intuitively, making the cumulative reward smaller by subtracting it with a baseline will make smaller gradients, and thus smaller and more stable updates.
 The baseline can take various values. The set of equations below illustrates the classic variants of actor critic methods (with respect to REINFORCE)
 ![baselines](baselines.PNG)
 
