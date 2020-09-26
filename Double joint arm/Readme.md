@@ -31,9 +31,9 @@ Clone the repository and unpack the environment file in the project folder.
 
 ## Instructions
 
-To train the agent run [ddpg.py](ddpg.py)
+To train the agent run [DDPG_project.py](DDPG_project.py)
 
 Description of the implementation is provided in [Report.md](Report.md). 
 For technical details see the code.
 
-Actor and critic model weights are stored in [actor.pth](actor.pth) and [critic.pth](critic.pth), respectively.
+Actor and critic model weights are stored in [checkpoint_actor(1).pth](checkpoint_actor(1).pth) and [checkpoint_critic(1).pth](checkpoint_critic(1).pth), respectively.
