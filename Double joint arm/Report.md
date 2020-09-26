@@ -11,14 +11,16 @@ Septempber 26th, 2020
 
 ### Project Overview
 
-This project is to train an agnent to navigate and collect bananas in a large square world. A reward of +1 is provided for collecting a yellow banana, and a reward of -1 is provided for collecting a blue banana. Thus, the goal of the agent is to collect as many yellow bananas as possible while avoiding blue bananas.
-The state space has 37 dimensions and contains the agent's velocity, along with ray-based perception of objects around the agent's forward direction. Given this information, the agent has to learn how to best select actions. Four discrete actions are available, corresponding to: move forward, move backward, turn left, turn right (You can check the Readme.md for a gif of an agent navigating). The task is episodic, means that the environment terminate after 300 steps, each steps is a succession of state,action,reward,next state.
+This project is to train an agnent in the Reacher environment. It is a double joint arm  which have to follow a moving target continuously. So this is a way to train a double-jointed virtual robotic arm to go to Reach (Reacher) a specific given target. A reward of +0.1 is provided for each step that the agent's hand is in the goal location.
+
+The observation space consists of 33 variables corresponding to position, rotation, velocity, and angular velocities of the arm. Each action is a vector with four numbers, corresponding to torque applicable to two joints. Every entry in the action vector should be a number between -1 and 1.
+The task is episodic, means that the environment terminate after 1500 steps maximum, each steps is a succession of state,action,reward,next state.
 
 
 
 ### Problem Statement
 
-To make the agent learn, I will use a technique in Deep Reinceforcement Learning called Deep Q-Networks with some tweaks. 
+To make the agent learn, I will use a technique in Deep Reinceforcement Learning called Deep Deterministic Policy Gradient with some tweaks. 
 
 First of all, deep reinforcement is a field of AI in which we use the environement and is feedback to the agent to guide the agent how to learn form it. ![Deep RL](DeepRL.PNG) [image source](https://missinglink.ai/guides/neural-network-concepts/complete-guide-deep-reinforcement-learning-concepts-process-real-world-applications/)
 The procedure is simple. In our case, the agent move in the squareWorld and is in some state H (example: State H velocity 3 mph , ray vision at angle 30 degres from the west wall,...) and if he collects a yellow banana, he receives a reward of +1. When that happens, we will change the way the agent will act in the future to emphasize more the action the agent took when he was in state H.  
