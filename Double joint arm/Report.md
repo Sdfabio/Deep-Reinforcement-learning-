@@ -129,19 +129,19 @@ Here is the complete list of hyperparamters with their values after turning.
 
 | Hyperparameter | Value | Description |
 |---|---:|---|
-| Replay buffer size | 1e6 | Maximum size of experience replay buffer |
+| Replay buffer size | 1e5 | Maximum size of experience replay buffer |
 | Replay batch size | 128 | Number of experiences sampled in one batch |
 | Actor hidden units | 256, 256 | Number of units in hidden layers of the actor model |
-| Actor critic units | 256, 256 | Number of units in hidden layers of the critic model |
-| Actor learning rate | 3e-4 | Controls parameters update of the online actor model |
+| Actor critic units | 256, 256, 256, 128| Number of units in hidden layers of the critic model |
+| Actor learning rate | 1e-4 | Controls parameters update of the online actor model |
 | Critic learning rate | 3e-4 | Controls parameters update of the online critic model |
-| Target update mix | 1e-3 | Controls parameters update of the target actor and critic models |
+| Target update mix | 5e-3 | Controls parameters update of the target actor and critic models |
 | Discount factor | 0.99 | Discount rate for future rewards |
 | Ornstein-Uhlenbeck, mu | 0 | Mean of the stochastic  process|
-| Ornstein-Uhlenbeck, theta | 0.15 | Parameter of the stochastic process |
-| Ornstein-Uhlenbeck, sigma | 0.05 | Standard deviation of the stochastic process |
-| Max episodes | 1000 | Maximum number of episodes to train |
-| Max steps | 1e6 | Maximum number of timesteps per episode |
+| Ornstein-Uhlenbeck, theta | 0.17 | Parameter of the stochastic process |
+| Ornstein-Uhlenbeck, sigma | 0.24 | Standard deviation of the stochastic process |
+| Max episodes | 500 | Maximum number of episodes to train |
+| Max steps | 1500 | Maximum number of timesteps per episode |
 
 
 ## Results and Validation
