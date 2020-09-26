@@ -2,9 +2,9 @@
 
 
 # Deep reinforcement Nanodegree
-## Navigation Project
+## Continuous Control Project
 Fabrice Simo Defo  
-July 11th, 2020
+Septempber 26th, 2020
 
 ## I. Definition
 
