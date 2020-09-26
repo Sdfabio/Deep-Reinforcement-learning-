@@ -142,7 +142,7 @@ Here is the complete list of hyperparamters with their values after turning.
 The agent was able to solve the environment by achieving score above 30 over 100 consecutive episodes after 300 episodes.
 Plot of the score:
 
-![Rewards plot](scores.png)
+![Rewards plot](Double joint arm/scores.png)
 
 
 ## V. Conclusion
