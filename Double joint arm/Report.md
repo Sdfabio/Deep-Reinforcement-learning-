@@ -20,7 +20,7 @@ The task is episodic, means that the environment terminate after 1500 steps maxi
 
 ### Problem Statement
 
-To make the agent learn, I will use a technique in Deep Reinceforcement Learning called Deep Deterministic Policy Gradient with some tweaks. 
+To make the agent learn, I will use a technique in Deep Reinceforcement Learning called Deep Deterministic Policy Gradient algorithm as proposed by Lillicrap, Timothy P., et al. "Continuous control with deep reinforcement learning.". 
 
 First of all, deep reinforcement is a field of AI in which we use the environement and is feedback to the agent to guide the agent how to learn form it. ![Deep RL](DeepRL.PNG) [image source](https://missinglink.ai/guides/neural-network-concepts/complete-guide-deep-reinforcement-learning-concepts-process-real-world-applications/)
 The procedure is simple. In our case, the agent move in the squareWorld and is in some state H (example: State H velocity 3 mph , ray vision at angle 30 degres from the west wall,...) and if he collects a yellow banana, he receives a reward of +1. When that happens, we will change the way the agent will act in the future to emphasize more the action the agent took when he was in state H.  
@@ -42,7 +42,7 @@ To be brief, the agent move in the environment with random policy, collect some 
 
 ### Metrics and benchmark
 
-To measure how the agent performs, we will calculate the mean score in the last 100 episodes. A score in an episode is the sum of the rewards in that episode (#yellow bananas -  #blue bananas collected). And if the mean score of the last 100 episodes attains 13, we will considered that the agent is trained enough and that the task is solved. The benchmark is to attain this average score in 1800 episodes. 
+To measure how the agent performs, we will calculate the mean score in the last 100 episodes. A score in an episode is the sum of the rewards in that episode. And if the mean score of the last 100 episodes attains 30, we will considered that the agent is trained enough and that the task is solved. The benchmark is to attain this average score in 1800 episodes maximum. 
 
 
 ## II. Analysis
@@ -72,11 +72,51 @@ To approximate and maximize the Q-function, I use a deep Q-network. The process 
   
   3) As you can see in formula of the error, in the first term, we don't use the action that maximizes the Q-Value for parameters θ_target , but we choose action that maximizes for parameters θ_local and evaluate Q_target with this action. At the beginning of the training we don’t have enough information about the best action to take. So when we take the maximum Q-value (which is noisy in the beginning) as the best action to take,  we can end in false positives . Then the learning become complicated because of that. So to reduce this problem of [overestimation of Q-value](https://arxiv.org/pdf/1509.06461.pdf)  , we use our DQN local network to select what is the best action to take for the next state (the action with the highest Q value) and we use our target network to calculate the target Q value of taking that action at the next state. This technique is called Double DQN
   
-  4) Finally, as you can see in model_project.py , we used technique of [dueling DQN](https://arxiv.org/pdf/1511.06581.pdf) , means that we calculate the Q-value by doing the sum: 
+  4) As you can see in model_project.py , we used technique of [dueling DQN](https://arxiv.org/pdf/1511.06581.pdf) , means that we calculate the Q-value by doing the sum: 
   
  ![qvalue](qvalue.PNG)
 
 where alpha and beta are the respective parameters for fc4_advantage which calculate the advantage function and fc4_value calculating the value function, each with his own neural network (that's why different parameters). Why ? This is because , for some states, it is unnecessary to know whether to move right  or left,... . If for example our agent  is in the middle of 4 equally espaced yellow bananas (state EXAMPLE), searching for the action that will maximize the q-value is futile in this state. The advantage function is intuitive like his name. When we are in a state s, she helps to calculate which advantage we will have when we choose action a compared to others action a'. So if we are in a state that doesn't give an advantage to any actions a, then the advantage function A will be low and in the formula above, only the Value function term will help calculating the Q value (good because in state EXAMPLE we don't need more information). But when there is an advantage turning left for example then A will not be as low, and this will help optimize the Q-value to turn left in this state. That's why we use 2 streams at the end of our network (fc4_advantage , fc4_value) and sum them to calculate the Q-value. To learn valuable information and not unecessary information. 
+
+ 5) DDPG: 
+The DDPG algorithm is implemented in the [ddpg.py](ddpg.py) file. 
+Learning of continuous actions requires an actor (`Actor` class) and a critic (`Critic` class) model.
+The actor model learns to predict an action vector while the critic model learns Q values for state-action pairs.
+DDPG uses experience replay (`Replay` class) to sample batches of uncorrelated experiences to train on. 
+It also distinguishes between online and target models for both actor and critic, similar to fixed Q-targets and double DQN technique.
+Online models are updated by minimizing loses while target models are updated through soft update, 
+i.e. online model parameters values are partially transferred to target models. 
+This helps to avoid overestimation of Q-values and makes the training more stable.
+
+The core of DDPG algorithm is implemented in the `Agent` class. 
+The `act` method generates an action for the given state with the online actor model.
+An important aspect is the noise added to the actions to allow exploration of the the action space.
+The noise is generated through the Ornstein–Uhlenbeck process, 
+which is a stochastic process that is both Gaussian and Markov, drifting towards the mean in long-term.
+The `learn` method implements updates to the models and has the following flow:
+
+1. A batch of experiences is sampled from the replay buffer.
+2. Update online critic model
+    1. Predict actions for the next states with the target actor model
+    2. Compute Q-values for the next states and actions with the target critic model
+    3. Compute target Q-values for the current states and actions using the Bellman equation
+    4. Compute Q values for the current states and actions with the online critic model
+    5. Use the target and online Q-values to compute the loss
+    6. Minimize the loss for the online critic model
+3. Update online actor model
+    1. Predict actions for current states from the online actor model
+    2. Compute Q-values with the online critic model
+    3. Use the Q-values to compute the loss
+    4. Minimize the loss for the online actor model
+4. Soft update of the target critic and actor models
+
+Training of the agent is implemented in the `run` function, which has the following flow:
+
+1. Every timestep a state of the environment is observed
+2. The agent selects an action
+3. The environment provides the next state, the reward received and the information whether the episode is completed.
+4. State, action, next state and the reward constitute the experience that the agent adds to its replay buffer.
+5. When enough experiences are collected the agent learns as described above.
 
 
 ## IV. Results
