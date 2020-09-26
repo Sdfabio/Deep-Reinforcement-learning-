@@ -53,7 +53,7 @@ We directly and only use the states given by the environment to make the agent l
 ### Algorithms and Techniques
 
 One way to reduce variance and increase stability is subtracting the cumulative reward by a baseline:
-![baseline](baseline.PNG)
+![baseline](baseline_formula.PNG)
 
 Intuitively, making the cumulative reward smaller by subtracting it with a baseline will make smaller gradients, and thus smaller and more stable updates.
 The baseline can take various values. The set of equations below illustrates the classic variants of actor critic methods (with respect to REINFORCE)
