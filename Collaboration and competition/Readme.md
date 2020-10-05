@@ -19,7 +19,7 @@ The environment is considered solved, when the average (over 100 episodes) of th
 
 ### Environment details
 
-The environment is based on [Unity ML-agents](https://github.com/Unity-Technologies/ml-agents). The project where I have made the actual work is on Udacity workspace and similar to the [Tennis](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Examples.md#tennis) environment on the Unity ML-Agents GitHub page.
+The environment is based on [Unity ML-agents](https://github.com/Unity-Technologies/ml-agents). The project where I have made the actual work is on Udacity workspace and similar to the [Tennis](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Examples.md#tennis) environment on the Unity ML-Agents GitHub page. In that workspace, it was not possible to show visual results of the game after the training. So the gif used in this repository is an illustration of what the agents could attain when solving the environment. 
 
 The observation space consists of 8 variables corresponding to the position and velocity of the ball and racket. Each agent receives its own, local observation. Two continuous actions are available, corresponding to movement toward (or away from) the net, and jumping. 
 
