@@ -2,7 +2,7 @@
 
 This project repository is my work for the Udacity's [Deep Reinforcement Learning Nanodegree](https://www.udacity.com/course/deep-reinforcement-learning-nanodegree--nd893). This project is to apply our understanding of Multi Agent environments. 
 
-## Description of the project (Mainly comes from Udacity):
+## Description of the project:
 
 ![Tennis Agents](collaboration.gif)(This gif is just an illustration of the game. For my code please look at the **environment details**)
 
