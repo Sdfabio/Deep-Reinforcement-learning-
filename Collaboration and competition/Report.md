@@ -4,7 +4,7 @@
 # Deep reinforcement learning Nanodegree(Udacity)
 ## Competion and collaboration Project
 Fabrice Simo Defo  
-October 3th, 2020
+October 4th, 2020
 
 
 ### Project Overview and benchmarking
@@ -35,7 +35,7 @@ This equation calculates the *EXPECTED* (we are in a stochastic environment) rew
 
 Now with all that in mind, we have to consider a serious fact. Our state are constituted of 37 dimensions and some of them contains real numbers. Means that we have a continuum of state. So our Q function is not like a simple table with discrete state each with 4 actions. What can be a way to transform a real input of 37 real numbers (state s) into 4 real numbers representing (Q(s,left),Q(s,right),...) ? A neural network can be our solution. So we use neural networks to approximate the Q-function. And we maximized it through refreshing the initial Q-function with new values coming from the navigation of the agent. We optimize the neural network by using Adam optimization on this error:  
 
-![error](error.PNG)
+![error](error.PNG)[Richard S. Sutton and Andrew G. Barto](http://incompleteideas.net/book/RLbook2020.pdf) 
  
  As you can see, there are 2 Neural networks one local and one target (different parameters θ_local and θ_target ). We use a way to optimize them while stabilizing the learning with some techniques. And one more important problem is that we update the policy parameter through Monte Carlo updates (i.e. taking random samples). This introduces in inherent high variability in log probabilities (log of the policy distribution) and cumulative reward values, because each trajectories during training can deviate from each other at great degrees. Consequently, the high variability in log probabilities and cumulative reward values will make noisy gradients, and cause unstable learning and/or the policy distribution skewing to a non-optimal direction. Besides high variance of gradients, another problem with policy gradients occurs trajectories have a cumulative reward of 0. The essence of policy gradient is increasing the probabilities for “good” actions and decreasing those of “bad” actions in the policy distribution; both “goods” and “bad” actions with will not be learned if the cumulative reward is 0. One way to reduce variance and increase stability is subtracting the cumulative reward by a baseline
 
@@ -43,21 +43,16 @@ Now with all that in mind, we have to consider a serious fact. Our state are con
 
 ## Implementation
 The environment was solved using a deep reinforcement learning agent. The implementation can be found in the [Tennis.ipynb](Tennis.ipynb) which contains
-contains the rl-agents (2 in total) in the MADDPG part, and also the neural networks to implement the actor critic method. I advise you to read the report on my last projects [Navigation](Deep-Reinforcement-learning-/Navigation) and [Continuous control](Deep-Reinforcement-learning-/Continuous_control)
+contains the rl-agents (2 in total) in the MADDPG part, and also the neural networks to implement the actor critic method. I advise you to read the report on my last projects [Navigation](Deep-Reinforcement-learning-/Navigation) and [Continuous control](Deep-Reinforcement-learning-/Continuous_control) for better understanding of the DDPG technique.
 
 ### Learning algorithm
 [MADDPG](https://arxiv.org/abs/1706.02275) which is an actor-critic approach was used as the learning algorithm for the agent.
 This algorithm is derived from [DDPG](https://arxiv.org/abs/1509.02971), but manages to solve tasks with multiple agents. You can look at the next image and pseudo-code for better understanding:
 ![MADDPG](MADDPG.PNG)
 ![MADDPG_A](MADDPG_Article.PNG)
-MADDPG is an off-policy algorithm and utilizes four neural networks: a local actor, a target actor, a local critic and a target critic
-Each training step the experience (state, action, action_other_agent, reward, next state, next_state_other_agent) the two agents gained was stored.
-Then every training step the agent learned from a random sample from the stored experience. The actor tries to estimate the
-optimal policy by using the estimated state-action values from the critic while critic tries to estimate the optimal q-value function
-and learns by using a normal q-learning approach. Using this approach one gains the benefits of value based and policy based
-methods at the same time. **By giving the critic access to the action of the other player the learning process gets stabilized
-without requiring to give the additional information** to the actor which is the only network required for acting after the
-agent was trained successfully.
+MADDPG is an off-policy algorithm and utilizes four neural networks: a local actor, a target actor, a local critic and a target critic. In each training step, the experience (state, action, action_other_agent, reward, next state, next_state_other_agent) for the two agents was gained and stored in **shared_memory**. Why ? Because we are approximating the Q-value with the Critic, from experiences taken from the navigation and episodes of the agent. If the network learned only from consecutive samples of experience as they occurred sequentially in the environment, the samples would be highly correlated. This will cause a learning depending on the initial random policy which dictates the sequence of states. We don't want the learning to depend on the initial random policy. So taking random samples from replay memory breaks this correlation. And a bonus, we will have more efficient use of previous experience, by learning with it multiple times. In fact, multiple passes with the same data is beneficial, especially when there is low variance in immediate outcomes (reward, next state) given the same state, action pair.
+The actor tries to estimate the optimal policy by using the estimated state-action values from the critic while critic tries to estimate the optimal q-value function
+and learns by using a normal q-learning approach. Using this approach one gains the benefits of value based and policy based methods at the same time. **By giving the critic access to the action of the other player the learning process gets stabilized without requiring to give the additional information** to the actor which is the only network required for acting after the agent was trained successfully.
 
 ### Hyperparameters
 The following hyperparameters were used:
